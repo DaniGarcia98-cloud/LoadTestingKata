@@ -28,13 +28,15 @@ jobs:
           java-version: '18'
 
       - name: Run Gatling tests
-        id: execution
-        run: echo "id=$(date +%s)" >> $GITHUB_ENV
+        run: ${{ matrix.command }}
+
+      - name: Debug Gatling Reports
+        run: ls -R target/gatling/ || echo "No reports found"
 
       - name: Upload Reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: report-load-${{ env.id }}
+          name: report-load-${{ github.run_id }}
           path: target/gatling/**
           retention-days: 1
