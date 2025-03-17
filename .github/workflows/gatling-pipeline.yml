@@ -33,5 +33,5 @@ jobs:
       - name: Upload Gatling reports
         uses: actions/upload-artifact@v4
         with:
-          name: gatling-reports-${{ github.run_id }}-${{ github.run_attempt }}
+          name: gatling-reports-${{ github.run_id }}-${{ matrix.command }}
           path: target/gatling/**
