@@ -3,7 +3,7 @@ name: Gatling CI
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   test:
