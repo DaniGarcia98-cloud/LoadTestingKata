@@ -28,10 +28,13 @@ jobs:
           java-version: '18'
 
       - name: Run Gatling tests
-        run: ${{ matrix.command }}
+        id: execution
+        run: echo "id=$(date +%s)" >> $GITHUB_ENV
 
-      - name: Upload Gatling reports
+      - name: Upload Reports
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: gatling-reports-${{ github.run_id }}-${{ matrix.command }}
+          name: report-load-${{ env.id }}
           path: target/gatling/**
+          retention-days: 1
