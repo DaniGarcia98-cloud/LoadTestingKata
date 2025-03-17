@@ -28,11 +28,10 @@ jobs:
           java-version: '18'
 
       - name: Run Gatling tests
-
         run: ${{ matrix.command }}
 
       - name: Upload Gatling reports
         uses: actions/upload-artifact@v4
         with:
-          name: gatling-reports
+          name: gatling-reports-${{ matrix.command }}
           path: target/gatling/**
