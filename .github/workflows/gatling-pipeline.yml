@@ -30,6 +30,9 @@ jobs:
       - name: Run Gatling tests
         run: ${{ matrix.command }}
 
+      - name: Set Artifact ID
+        run: echo "ARTIFACT_ID=$(date +%s)" >> $GITHUB_ENV
+
       - name: Debug Gatling Reports
         run: ls -R target/gatling/ || echo "No reports found"
 
@@ -37,6 +40,6 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: report-load-${{ github.run_id }}
+          name: report-load-${{ env.ARTIFACT_ID }}
           path: target/gatling/**
           retention-days: 1
